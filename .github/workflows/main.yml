@@ -1,0 +1,37 @@
+name: Compile-Tex
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Ls
+        run: ls -al
+      - name: PWD
+        run: pwd
+      
+  compile:
+    runs-on: ubuntu-latest
+    name: Compile tex CV
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Build docker images
+        run: docker build -t local -f  Dockerfile .
+      - name: Run tests
+        run: docker run -v ${PWD}:/working_dir local
+    
+      - name: Commit changes
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git add CV.pdf
+          git commit -am "Auto updating CV"
+          git push
