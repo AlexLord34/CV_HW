@@ -2,6 +2,6 @@
 
 
 cd working_dir
-pdflatex  CV.tex
+pdflatex  Content/CV.tex
 
 
