@@ -26,7 +26,7 @@ jobs:
       - name: Build docker images
         run: docker build -t local -f  Dockerfile .
       - name: Run tests
-        run: docker run -v ${PWD}:/working_dir/Content local
+        run: docker run -v ${PWD}:/working_dir local
     
       - name: Commit changes
         run: |
